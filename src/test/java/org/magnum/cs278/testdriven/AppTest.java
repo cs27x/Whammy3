@@ -149,4 +149,33 @@ public class AppTest {
 			assertTrue(e.getMonth().toLowerCase().equals("january"));
 		}
 	}
+
+	@Test
+	public void testGetMarchEvents2014() throws Exception {
+		String month = "Mar-2014";
+		String[] evts = new String[13];
+		evts[0] = "MTPC";
+		evts[1] = "Mardi Gras Y'all Street Festival";
+		evts[2] = "Let's Get Richland Creek Clean!";
+		evts[3] = "Tom King 1/2 Marathon";
+		evts[4] = "St. Puppy's Day";
+		evts[5] = "St. Patrick's Day Festival";
+		evts[6] = "American Musical Salute Band Concert";
+		evts[7] = "Arbor Day";
+		evts[8] = "MTPC";
+		evts[9] = "Music City Exchange Dance";
+		evts[10] = "Nashville NEDA Walk";
+		evts[11] = "The Greenways Marathon";
+		evts[12] = "TN Kurdish Counsel Picnic";
+		evts[13]= "Vanderbilt ZTA Think Pink 5K";
+		evts[14]= "Puppies in the Park/Belmont Partnership";
+		evts[15]= "Shelby Shootout Disc Golf";
+		evts[16]= "Treehouse Racing/Bike Race";
+		List<Event> marchEvents = app.getMarchEvents2014();
+		assertTrue(marchEvents.size() == 17);
+		for(int i = 0; i < 17; i++){
+			assertTrue(marchEvents.get(i).getMonth() == month);
+			assertTrue(marchEvents.get(i).getName() == evts[i]);
+		}
+	}
 }
