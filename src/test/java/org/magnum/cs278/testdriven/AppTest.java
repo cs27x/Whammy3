@@ -188,9 +188,9 @@ public class AppTest {
 		}
 		for (int i = 0; i < events.size(); i++)
 		{
-			assertTrue(events.get(i).getName().equals(evts.get(i).getName()));
-			assertTrue(events.get(i).getDate().equals(evts.get(i).getDate()));
-			assertTrue(events.get(i).getAttendance().equals(evts.get(i).getAttendance()));
+			assertTrue(events.get(i).getName().equals(evtsAtLocation.get(i).getName()));
+			assertTrue(events.get(i).getDate().equals(evtsAtLocation.get(i).getDate()));
+			assertTrue(events.get(i).getAttendance().equals(evtsAtLocation.get(i).getAttendance()));
 		}
 	}
 }
