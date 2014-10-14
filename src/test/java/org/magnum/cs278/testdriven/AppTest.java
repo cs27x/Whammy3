@@ -59,7 +59,8 @@ public class AppTest {
 	@Test
 	public void testAttendanceGreaterThanFive() throws Exception {
 		List<Event> events = app.AttendanceGreaterThanFive();
-
+		assertTrue(events.size() > 0);
+		
 		for (Event event : events) {
 			assertTrue(Integer.parseInt(event.getAttendance()) > 5);
 		}
@@ -77,21 +78,26 @@ public class AppTest {
 
 	@Test
 	public void testGetParkSpecialPermitsByAttendance() throws Exception {
+		
 		List<Event> events = app.getParkSpecialPermitsByAttendance();
 		assertTrue(events.size() > 0);
+		
 		boolean sorted = true;
 		double last = Double.POSITIVE_INFINITY;
+		
 		for (Event event : events) {
-			if (Double.parseDouble(event.getAttendance()) > last) {
-				sorted = false;
-			} else {
-				last = Double.parseDouble(event.getAttendance());
-			}
+			
 			assertNotNull(event);
 			assertNotNull(event.getLocation());
 			assertNotNull(event.getName());
 			assertNotNull(event.getAttendance());
 			assertNotNull(event.getDate());
+			
+			if (Double.parseDouble(event.getAttendance()) > last) {
+				sorted = false;
+			} else {
+				last = Double.parseDouble(event.getAttendance());
+			}
 		}
 		assertTrue(sorted);
 	}
@@ -105,25 +111,20 @@ public class AppTest {
 		for (Event event : events) {
 			assertTrue(event.getLocation().equals("East Park"));
 		}
-
-		events = app.checkLocation("Riverfront Park");
-		assertTrue(events.size() > 0);
-
-		for (Event event : events) {
-			assertTrue(event.getLocation().equals("Riverfront Park"));
-		}
-
-		events = app.checkLocation("San Francisco");
-
-		DateTime today = DateTime.now();
-
-		for (Event event : events) {
+	}
+	
+	@Test
+	public void testEventFieldsNotNull() throws Exception {
+		
+		List<Event> events = app.checkLocation("San Francisco");
+		assertTrue(events.size() >= 0);
+		
+		for(Event event: events){
 			assertNotNull(event);
 			assertNotNull(event.getLocation());
 			assertNotNull(event.getName());
 			assertNotNull(event.getAttendance());
 			assertNotNull(event.getDate());
-			assertEquals(event.getLocation(), "San Francisco");
 		}
 	}
 
@@ -145,6 +146,7 @@ public class AppTest {
 	@Test
 	public void testGetAllEventsInMonth() throws Exception {
 		List<Event> evts = app.getAllEventsInMonth("january");
+		assertTrue(evts.size() >= 0);
 		for (Event e : evts) {
 			assertTrue(e.getMonth().toLowerCase().equals("january"));
 		}
