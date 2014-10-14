@@ -148,5 +148,13 @@ public class AppTest {
 		for (Event e : evts) {
 			assertTrue(e.getMonth().toLowerCase().equals("january"));
 		}
+	}	
+	
+	@Test
+	public void testgetRiverfrontParkSpecialPermits() throws Exception {
+		List<Event> events = app.getRiverfrontParkSpecialPermits();
+		for (Event event : events) {
+			assertTrue(event.getLocation().toLowerCase().equals("riverfront park"));
+		}
 	}
 }
