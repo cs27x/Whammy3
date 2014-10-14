@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.joda.time.DateTime;
@@ -52,6 +53,11 @@ public class AppTest {
 	public void testGetEventsInJune() throws Exception {
 		List<Event> events = app.getEventsInJune();
 		for (Event event : events) {
+			assertNotNull(event);
+			assertNotNull(event.getLocation());
+			assertNotNull(event.getName());
+			assertNotNull(event.getAttendance());
+			assertNotNull(event.getDate());
 			assertTrue(event.getMonth().toLowerCase().contains("jun"));
 		}
 	}
@@ -149,6 +155,34 @@ public class AppTest {
 		assertTrue(evts.size() >= 0);
 		for (Event e : evts) {
 			assertTrue(e.getMonth().toLowerCase().equals("january"));
+		}
+	}
+	
+	@Test
+	public void testGetEventsWithLocation() throws Exception {
+		List<Event> events = app.getEventsWithLocation("Percy Warner Park");
+		assertTrue(events.size() > 0);
+		for (Event event: events)
+		{
+			assertNotNull(event);
+			assertNotNull(event.getLocation());
+			assertNotNull(event.getName());
+			assertNotNull(event.getAttendance());
+			assertNotNull(event.getDate());
+			assertTrue(event.getLocation().equals("Percy Warner Park"));
+		}
+		List<Event> evts = app.getParkSpecialPermits();
+		List<Event> evtsAtLocation = new ArrayList<Event>();
+		for (Event evt : evts) {
+			if (evt.getLocation().equals("Percy Warner Park")) {
+				evtsAtLocation.add(evt);
+			}
+		}
+		for (int i = 0; i < events.size(); i++)
+		{
+			assertTrue(events.get(i).getName().equals(evts.get(i).getName()));
+			assertTrue(events.get(i).getDate().equals(evts.get(i).getDate()));
+			assertTrue(events.get(i).getAttendance().equals(evts.get(i).getAttendance()));
 		}
 	}
 }
